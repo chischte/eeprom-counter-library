@@ -6,7 +6,7 @@
  September 2019, Zürich
  * *****************************************************************************
  The EEPROM memory has a specified lifetime of 100,000 write/erase cycles
- The storage location will be changed after 100,000 cycles
+ The wear out the EEPROM memory evenly, the storage location will be changed every 10,000 write cycles
  Storage data Type unsigned long (4Bytes)
  * *****************************************************************************
  EEPROM USAGE
@@ -15,8 +15,9 @@
  storeLocation      stores the writecounter
  storelocation1-n places where the values are stored  
  * *****************************************************************************
- 
- 
+ TODO:
+ SET MAXIMUM VALUE FOR STORELOCATION
+ COMPLETE DEBUG INFORMATION FUNCTION
  */
 
 #ifndef EEPROM_Counter_h
@@ -26,7 +27,7 @@
 
 class EEPROM_Counter {
 public:
-    EEPROM_Counter(const int eepromSize, byte eepromNumberOfValues);
+    EEPROM_Counter(const int eepromSize, byte numberOfValues);
 
     void countOneUp(byte valueNumber);
     //... increases the value by one
@@ -39,10 +40,20 @@ public:
 
     long getValue(byte valueNumber); // returns current value
 
+    void printDebugInformation();
+
+    void resetStoreLocation();
+
 private:
 
     int _storeLocation;
+    byte _numberOfValues;
     int calculateAddress(byte valueNumber);
+    long eepromRead(int sourceAdress);
+    void eepromWrite(long newValue, int destinationAddress);
+    void eepromMonitorWriteCycles();
+    void eepromMoveStorageLocation();
+    long _numberOfWriteCycles;
 
 };
 #endif

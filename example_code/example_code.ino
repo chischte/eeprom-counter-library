@@ -27,9 +27,12 @@ void setup() {
 
 void loop() {
 
+  //exampleCounter.setAllZero();
   //exampleCounter.countOneUp(longTimeCounter);
-  exampleCounter.update(longTimeCounter, 1115111);
-  long ValueFromGetValue = exampleCounter.getValue(longTimeCounter);
-  Serial.println(ValueFromGetValue);
-  delay(500);
+  //exampleCounter.update(longTimeCounter, 1115111);
+  exampleCounter.printDebugInformation();
+  //exampleCounter.resetStoreLocation();
+  //long ValueFromGetValue = exampleCounter.getValue(longTimeCounter);
+  //Serial.println(ValueFromGetValue);
+  delay(2000);
 }
