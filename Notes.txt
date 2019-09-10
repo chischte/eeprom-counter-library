@@ -10,9 +10,12 @@ Read where the values are stored from eeprom
 Read all Values from eeprom an write them into the array (SRAM)
 *************************************************
 USER FUNCTIONS:
-setZero(value[x]) //sets a value zero
 
-setAllZero() //sets all values to zero 
+setValue(value[x], value) //sets a value zero
+
+setAllZero()
+... sets all values to zero
+... uses the setValue function
 
 update(value[x]) 
 ... checks if value has been changed an store it on eeprom
@@ -27,7 +30,9 @@ SLOT 0 stores the storelocation
 storelocation0     stores the writecounter
 storelocation1-n places where the values are stored  
 
-
+*************************************************
+*************************************************
+enum counter{longTimeCounter,shortTimeCounter,toolIdentNumber};
 *************************************************
 *************************************************
 CODE FROM PUSHTYPE:
