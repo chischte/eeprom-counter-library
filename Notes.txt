@@ -1,15 +1,8 @@
-*************************************************
-INITIAL ROUTINE:
-EEPROM_Counter::EEPROM_Counter(const int eepromSize, byte eepromNumberOfValues)
 
-//Define how many Values are to be stored
-//Create an Array to store all the values
-//Read where the values are stored from eeprom
-//Read all Values from eeprom an write them into the array (SRAM)
 *************************************************
 USER FUNCTIONS:
 
-countOneUp(value[x]), //increases the value by one
+
 
 void update(byte valueNumber, long newValue]) 
 ... checks if value is new, store new value on eeprom
@@ -81,11 +74,7 @@ long eeprom_updateroutine(long current_value)
 {
   if (initial_setup == false)
   {
-    //FIND OUT WHERE THE VALUES ARE STORED:
-    eeprom_read_block((void*) &storeLocation, (void*) 0, sizeof(2)); // destination / source / size
-    //READ EEPROM WRITECOUNTER:
-    eeprom_read_block((void*) &EEPROM_WriteCounter, (void*) storeLocation, sizeof(4)); // destination / source / size
-    initial_setup = true;
+   
   }
 
   //SHIFT STORELOCATION 4 BYTES FOR EVERY LONG VALUE
