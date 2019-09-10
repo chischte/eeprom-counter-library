@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+# ...KEYWORD1 is generally used for the classes that you define in your library.
+#######################################
+
+Debounce	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+# ...KEYWORD2 is used for the public member functions of the class.
+#######################################
+
+requestButtonState	KEYWORD2
+
+######################################
+# Constants (LITERAL1)
+# ...LITERAL1 is used for any #defines that are relevant for the user of the library.
+#######################################
+
+#KEY_NONE	LITERAL1

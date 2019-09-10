@@ -1,38 +1,36 @@
-TODO:
-check different eeprom sizes of different boards
-does it make sense to add the possiblity of changing the default eeprom size?
 *************************************************
-
 INITIAL ROUTINE:
-Define how many Values are to be stored
-Create an Array to store all the values
-Read where the values are stored from eeprom
-Read all Values from eeprom an write them into the array (SRAM)
+EEPROM_Counter::EEPROM_Counter(const int eepromSize, byte eepromNumberOfValues)
+
+//Define how many Values are to be stored
+//Create an Array to store all the values
+//Read where the values are stored from eeprom
+//Read all Values from eeprom an write them into the array (SRAM)
 *************************************************
 USER FUNCTIONS:
 
-setValue(value[x], value) //sets a value zero
+countOneUp(value[x]), //increases the value by one
+
+void update(byte valueNumber, long newValue]) 
+... checks if value is new, store new value on eeprom
+... counts writecycles and changes storage location before eeprom wears out
 
 setAllZero()
 ... sets all values to zero
 ... uses the setValue function
 
-update(value[x]) 
-... checks if value has been changed an store it on eeprom
-... counts writecycles and changes storage location before eeprom wears out
-
-get(value[x]) // returns current value
+long getValue(byte valueNumber) // returns current value
 
 *************************************************
 EEPROM USAGE
 SLOT 0 stores the storelocation
 
-storelocation0     stores the writecounter
+storeLocation      stores the writecounter
 storelocation1-n places where the values are stored  
 
 *************************************************
 *************************************************
-enum counter{longTimeCounter,shortTimeCounter,toolIdentNumber};
+
 *************************************************
 *************************************************
 CODE FROM PUSHTYPE:

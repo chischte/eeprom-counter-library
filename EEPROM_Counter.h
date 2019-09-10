@@ -1,7 +1,7 @@
 /*
  * *****************************************************************************
  * EEPROM_Counter.h
- * Library to store values on the arduino EEPROM memory
+ * Library to store values on the non volatile arduino EEPROM
  * Michael Wettstein
  * September 2019, Zürich
  * *****************************************************************************
@@ -14,19 +14,37 @@
 
 class EEPROM_Counter
 {
-public:
-  Cylinder(int pin);
-  void stroke(int push_time, int release_time);
-  void toggle();
-  void set(bool set_state);
-  bool request_state();
-  bool stroke_completed();
+	public:
+		EEPROM_Counter(const int eepromSize, byte eepromNumberOfValues);
+	
+	private:
+	
+};
+#endif
 
-private:
-  int _pin;
-  bool _state;
-  unsigned long _prev_time;
-  bool _stroke_completed = true;
+
+
+
+
+
+
+/*
+class Debounce
+{
+  public:
+    Debounce(const byte BUTTON_PIN);
+    bool requestButtonState();
+
+  private:
+    bool _debouncedButtonState;
+    bool _currentButtonState;
+    bool _debounceTimerSet = 0;
+    
+	byte _BUTTON_PIN;
+	int _debounceTime = 10;
+    
+	unsigned long _prevTime;
 };
 
 #endif
+*/
