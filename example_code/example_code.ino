@@ -14,7 +14,7 @@ const byte numberOfValues = endOfEnum;
 // DEFINE THE EEPROM SIZE OF YOUR BOARD:
 // EEPROM size Arduino Nano/Uno: 1024 bytes (ATmega328P)
 // EEPROM size Arduino Mega:     4096 bytes (ATmega2560)
-const unsigned int eepromSize = 1024; 
+const unsigned int eepromSize = 1024;
 
 // CREATE AN INSTANCE OF THE LIBRARY CLASS:
 EEPROM_Counter exampleCounter(eepromSize, numberOfValues);
@@ -26,10 +26,10 @@ void setup() {
 }
 
 void loop() {
-  
+
   //exampleCounter.countOneUp(longTimeCounter);
-  exampleCounter.update(longTimeCounter,1115111);
-  long ValueFromGetValue=exampleCounter.getValue(longTimeCounter);
+  exampleCounter.update(longTimeCounter, 1115111);
+  long ValueFromGetValue = exampleCounter.getValue(longTimeCounter);
   Serial.println(ValueFromGetValue);
   delay(500);
 }
