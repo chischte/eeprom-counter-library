@@ -7,14 +7,17 @@
 # ...KEYWORD1 is generally used for the classes that you define in your library.
 #######################################
 
-Debounce	KEYWORD1
+EEPROM_Counter	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 # ...KEYWORD2 is used for the public member functions of the class.
 #######################################
 
-requestButtonState	KEYWORD2
+countOneUp	KEYWORD2
+update		KEYWORD2
+setAllZero	KEYWORD2
+getValue	KEYWORD2
 
 ######################################
 # Constants (LITERAL1)

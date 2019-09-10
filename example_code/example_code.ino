@@ -2,7 +2,7 @@
 #include <EEPROM_Counter.h>
 
 // NAME THE VALUES TO BE STORED ON EEPROM BY ENTERING THEM IN THE LIST BELOW:
-// the list can have between 1 and 20 entries.
+// the list can have between 1 and 255 value entries.
 enum counter {
   longTimeCounter,  // example value name
   shortTimeCounter, // example value name
@@ -27,7 +27,9 @@ void setup() {
 
 void loop() {
   
-  exampleCounter.countOneUp(longTimeCounter);
-  
-  //Serial.println(numberOfValues);
+  //exampleCounter.countOneUp(longTimeCounter);
+  exampleCounter.update(longTimeCounter,1115111);
+  long ValueFromGetValue=exampleCounter.getValue(longTimeCounter);
+  Serial.println(ValueFromGetValue);
+  delay(500);
 }
