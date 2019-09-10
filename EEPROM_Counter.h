@@ -16,8 +16,9 @@
  storelocation1-n places where the values are stored  
  * *****************************************************************************
  TODO:
- SET MAXIMUM VALUE FOR STORELOCATION
- COMPLETE DEBUG INFORMATION FUNCTION
+ CHECK MOVE OF STORAGE LOCATION
+ IN DEBUG PRINT WRITCOUNTER SHOWS RANDOM NUMBERS
+ IN DEBUG VALUE 0 JUMPS TO VERY HIGH NUMBERS
  */
 
 #ifndef EEPROM_Counter_h
@@ -54,6 +55,7 @@ private:
     void eepromMonitorWriteCycles();
     void eepromMoveStorageLocation();
     long _numberOfWriteCycles;
+    int _maxStoreLocation;
 
 };
 #endif
