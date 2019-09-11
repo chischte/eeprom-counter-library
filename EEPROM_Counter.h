@@ -16,9 +16,8 @@
  storelocation1-n places where the values are stored  
  * *****************************************************************************
  TODO:
- CHECK MOVE OF STORAGE LOCATION
- IN DEBUG PRINT WRITCOUNTER SHOWS RANDOM NUMBERS
- IN DEBUG VALUE 0 JUMPS TO VERY HIGH NUMBERS
+ CLEAN UP THE WHOLE CODE
+ STORE EVERY THOUSANDS WRITE COUNT
  */
 
 #ifndef EEPROM_Counter_h
@@ -26,38 +25,34 @@
 
 #include "Arduino.h"
 
-class EEPROM_Counter {
+class EEPROM_Counter
+{
 public:
-    EEPROM_Counter(int eepromSize, int numberOfValues);
-    void initialize();
+  //FUNTIONS:
+  EEPROM_Counter(int eepromSize, int numberOfValues);
+  void countOneUp(int valueNumber); // increases the value by one
+  void update(int valueNumber, long newValue); // sets value
+  void setAllZero();
+  long getValue(int valueNumber); // returns current value
+  void printDebugInformation(); // extensively prints what happens with the values
 
-    void countOneUp(int valueNumber);
-    //... increases the value by one
+  // VARIABLES:
+  //n.a.
 
-    void update(int valueNumber, long newValue);
-    //... checks if value is new, store new value on eeprom
-    //... counts writecycles and changes storage location before eeprom wears out
-
-    void setAllZero();
-
-    long getValue(int valueNumber); // returns current value
-
-    void printDebugInformation();
-
-    void resetStoreLocation();
-
-//ex private://ex private://ex private://ex private://ex private://ex private://ex private:
-    int _storeLocation;
-    int _numberOfValues;
-    int calculateAddress(int valueNumber);
-    long eepromRead(int sourceAdress);
-    void eepromWrite(long newValue, int destinationAddress);
-    void eepromMonitorWriteCycles();
-    void eepromMoveStorageLocation();
-    long _numberOfWriteCycles;
-    int _maxStoreLocation;
 private:
+  // FUNCTIONS:
+  long eepromRead(int sourceAdress);
+  void eepromWrite(long newValue, int destinationAddress);
+  void eepromMonitorWriteCycles();
+  void eepromMoveStorageLocation();
+  int calculateAddress(int valueNumber);
 
+  // VARIABLES:
+  int _storeLocation;
+  int _maxStoreLocation;
+  int _storeWriteCounterCounter;
+  int _numberOfValues;
+  long _numberOfWriteCycles;
 
 };
 #endif

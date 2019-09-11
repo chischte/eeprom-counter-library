@@ -7,7 +7,7 @@ enum counter
   longTimeCounter,    // example value name
   shortTimeCounter,   // example value name
   toolIdentNumber,    // example value name
-  somethingElse, // example value name
+  somethingElse,      // example value name
   endOfEnum           // add additional values before this one...
                       // ...this has to be the last one!
 };
@@ -20,44 +20,32 @@ int eepromSize = 1024;
 
 // CREATE AN INSTANCE OF THE LIBRARY CLASS:
 EEPROM_Counter exampleCounter(eepromSize, numberOfValues);
-//EEPROM_Counter exampleCounter(eepromSize, 4);
-// The values in the brackets define the eeprom size and the number of values to be stored.
 
 void setup()
 {
-  Serial.begin(230400);
-  Serial.print("*****************");
-  //INITIALIZE THE EEPROM COUNTER:
-  //...maybee this step can be removed with a further develped library
-  exampleCounter.initialize();
-  Serial.println(" ");
-  Serial.print("Storelocation: ");
-  Serial.println(exampleCounter._storeLocation);
-  Serial.println(" ");
+  Serial.begin(115200);
+  Serial.println("EXIT SETUP");
 }
 
 void loop()
 {
 
-  //exampleCounter.setAllZero();
+  //exampleCounter.setAllZero(); //sets all values to zero
 
-  exampleCounter.countOneUp(longTimeCounter);
-  exampleCounter.countOneUp(longTimeCounter);
-
+  for (int i = 0; i < 5; i++)
+  {
+    exampleCounter.countOneUp(longTimeCounter);
+  }
   exampleCounter.countOneUp(shortTimeCounter);
 
   exampleCounter.countOneUp(toolIdentNumber);
-  exampleCounter.countOneUp(toolIdentNumber);
-  exampleCounter.countOneUp(toolIdentNumber);
 
   exampleCounter.update(somethingElse, 112233);
-  //exampleCounter.update(-1, 11);
 
-  //exampleCounter.resetStoreLocation();
-  //long ValueFromGetValue = exampleCounter.getValue(longTimeCounter);
-  //Serial.println(ValueFromGetValue);
-  //delay(1000);
+  long ValueFromGetValue = exampleCounter.getValue(longTimeCounter);
+  Serial.print("Value from getValue Function: ");
+  Serial.println(ValueFromGetValue);
   exampleCounter.printDebugInformation();
-  delay(1000);
+  //delay(1000);
 
 }
