@@ -29,6 +29,7 @@
 class EEPROM_Counter {
 public:
     EEPROM_Counter(int eepromSize, int numberOfValues);
+    void initialize();
 
     void countOneUp(int valueNumber);
     //... increases the value by one
