@@ -18,10 +18,10 @@ EEPROM_Counter::EEPROM_Counter(int eepromSize, int numberOfValues)
   int valueRead;
   int valueAddress = 0;    // the storeLocation is always stored on EEPROM byte 0 and 1
   eeprom_read_block((void*) &valueRead, (void*) valueAddress, sizeof(valueRead));
-  //.........................destination / source / size
+  //-------------------------destination--------source--------size
   _storeLocation = valueRead;
-  //IF STORELOCATION IS TO BIG OR TO SMALL, RESET IT TO 2
-  //...this can happen with a new board only
+  // IF STORELOCATION IS TO BIG OR TO SMALL, RESET IT TO 2
+  // this can happen with a new board only
   if (_storeLocation > _maxStoreLocation || _storeLocation < 2)
   {
     _storeLocation = 2;
@@ -29,7 +29,7 @@ EEPROM_Counter::EEPROM_Counter(int eepromSize, int numberOfValues)
     int valueAddress = 0;
     // the adress of the storeLocation is always stored on byte 0 and 1;
     eeprom_write_block((void*) &newValue, (void*) valueAddress, sizeof(newValue));
-    //..........................source / destination / size}
+    //--------------------------source------------destination---size}
 }
   _numberOfWriteCycles = eepromRead(_storeLocation);
 }
@@ -42,12 +42,12 @@ void EEPROM_Counter::countOneUp(int valueNumber)
   eepromWrite(newValue, valueAddress);
 }
 
-void EEPROM_Counter::update(int valueNumber, long newValue)
+void EEPROM_Counter::set(int valueNumber, long newValue)
 {
   int valueAddress = calculateAddress(valueNumber);
-  //CHECK IF VALUE HASN'T BEEN ASSIGNED YET:
   long storedValue = eepromRead(valueAddress);
-  if (newValue != storedValue)
+  // CHECK IF VALUE HASN'T BEEN ASSIGNED YET: 
+ if (newValue != storedValue)
   {
     eepromWrite(newValue, valueAddress);
   }
@@ -80,12 +80,14 @@ long EEPROM_Counter::eepromRead(int sourceAddress)
 {
   long valueRead;
   eeprom_read_block((void*) &valueRead, (void*) sourceAddress, sizeof(valueRead));
+  //-------------------------destination--------source---------size
   return valueRead;
 }
 
 void EEPROM_Counter::eepromWrite(long newValue, int destinationAddress)
 {
   eeprom_write_block((void*) &newValue, (void*) destinationAddress, sizeof(newValue));
+  //--------------------------source------------destination---------size}
   eepromMonitorWriteCycles();
 }
 
@@ -99,7 +101,8 @@ void EEPROM_Counter::eepromMonitorWriteCycles()
     int newValue = _numberOfWriteCycles;
     int destinationAddress = _storeLocation;
     eeprom_write_block((void*) &newValue, (void*) destinationAddress, sizeof(newValue));
-    _storeWriteCounterCounter = 0;
+    //--------------------------source------------destination---size}
+	_storeWriteCounterCounter = 0;
   }
 
   _storeWriteCounterCounter++;
@@ -108,20 +111,21 @@ void EEPROM_Counter::eepromMonitorWriteCycles()
     long newValue = _numberOfWriteCycles;
     int destinationAddress = _storeLocation;
     eeprom_write_block((void*) &newValue, (void*) destinationAddress, sizeof(newValue));
-    _storeWriteCounterCounter = 0;
+    //--------------------------source------------destination---size}
+	_storeWriteCounterCounter = 0;
   }
 }
 
 void EEPROM_Counter::eepromMoveStorageLocation()
 {
-  //CALCULATE NEW STORE LOCATION:
+  // CALCULATE NEW STORE LOCATION:
   int moveSizeInBytes = 4 + _numberOfValues * 4; //the long for the writeCounter is included
   int newStoreLocation = _storeLocation + moveSizeInBytes;
   if (newStoreLocation > _maxStoreLocation)
   {
     newStoreLocation = 2;
   }
-  //COPY VALUES FROM OLD TO NEW LOCATION:
+  // COPY VALUES FROM OLD TO NEW LOCATION:
   for (int i = 0; i < _numberOfValues; i++)
   {
     int oldValueAddress = calculateAddress(i);
@@ -131,14 +135,15 @@ void EEPROM_Counter::eepromMoveStorageLocation()
     long newValue = storedValue;
     int destinationAddress = newValueAddress;
     eeprom_write_block((void*) &newValue, (void*) destinationAddress, sizeof(newValue));
+    //--------------------------source------------destination---size}
   }
-  //Serial.println("WROTE");
+  // CHANGE STORELOCATION ADDRESS:
   _storeLocation = newStoreLocation;
   int newValue = _storeLocation;
   int valueAddress = 0;
   // the adress of the storeLocation is always stored on byte 0 and 1;
   eeprom_write_block((void*) &newValue, (void*) valueAddress, sizeof(newValue));
-  //.......................... source / destination / size}
+  //--------------------------source------------destination---size}
 }
 
 void EEPROM_Counter::printDebugInformation()
