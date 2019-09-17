@@ -4,7 +4,7 @@
 
 The ATmega328 microcontroller chip which is used on the Arduino Nano/Uno boards has an internal EEPROM storage of 1024 bytes.
 
-The ATmega2560 microcontroller chip of the Arduino mega has 4096 bytes of EEPROM storage.
+The ATmega2560 microcontroller chip of the Arduino Mega has 4096 bytes of EEPROM storage.
 
 This storage can be used to store values permanently.
 This can be very usefull if you want to realize a cycle counter or store some settings you made during board operation.
@@ -38,5 +38,6 @@ The basic commands are:
 	exampleCounter.printDebugInformation();	
   
 
-The Library can be installed by cloning or downloading it to Arduinos default library location (e.g. user/documents/Arduino/libraries/).
+The Library can be installed by cloning or downloading it to Arduinos default library location.
+(e.g. user/documents/Arduino/libraries/)
 
