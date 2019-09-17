@@ -1,7 +1,6 @@
 #include <EEPROM_Counter.h>
 
 // NAME THE VALUES TO BE STORED ON EEPROM BY ENTERING THEM IN THE LIST BELOW:
-//777777777777777777777777777 the list can have between 1 and 255 value entries.
 enum counter
 {
   longTimeCounter,    // example value name

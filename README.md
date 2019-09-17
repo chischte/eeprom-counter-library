@@ -1,61 +1,40 @@
 # eeprom-counter-library 
---- readme under construction
-
     
-    library to store values on the non volatile Arduino EEPROM memory
+	Library to store values on the non volatile Arduino EEPROM memory.
 
-...A brief description of your project, what it is used for and how does life get awesome when someone starts to use it.
-Installing / Getting started
+The ATmega328 microcontroller chip which is used on the Arduino Nano/Uno boards has an internal EEPROM storage of 1024 bytes.
+The ATmega2560 microcontroller chip of the Arduino mega has 4096 bytes of EEPROM storage.
+This storage can be used to store values permanently.
+This can be very usefull if you want to realize a cycle counter or store some settings you made during board operation.
 
-...how to download or install
+It is not recommended to store new values every loop because the EEPROM has "only" a specified lifetime of 100,000 write/erase cycles.
 
-git clone https://github.com/chischte/eeprom-counter-library.git
+The library manages the storage of long values to the EEPROM, it updates values that have been changed, and reads them after restart/reset of the Board.
 
-...how to use
+To wear of the memory evenly, every 10,000 write cycles the location of the values will be changed automatically.
 
-...Here again you should state what actually happens when the code above gets executed.
-Deploying / Publishing
+In the example code "eeprom_example_code", the possible commands of the library are listed, an their effect can be viewed in the serial print window.
 
-And again you'd need to tell what the previous code actually does.
-Features
+The basic commands are:
 
-What's all the bells and whistles this project can perform?
+	// CREATE AN INSTANCE OF THE LIBRARY CLASS:
+	EEPROM_Counter exampleCounter(eepromSize, numberOfValues); 
 
-    What's the main functionality
-    You can also do another thing
-    If you get really randy, you can even do this
+	// SET ALL STORED VALUES ZERO:
+	exampleCounter.setAllZero();
 
-Configuration
+	// COUNT ONE UP:
+	exampleCounter.countOneUp(numberOfTheCounter);
 
-Here you should write what are all of the configurations a user can enter when using the project.
-Argument 1
+	// SET COUNTER TO A VALUE:	
+	exampleCounter.set(numberOfTheCounter, valueToBeStored);	
 
-Type: String
-Default: 'default value'
+	// READ STORED VALUE FROM EEPROM:
+	long storedValue = exampleCounter.getValue(numberOfTheCounter);
+  
+	// PRINT OUT WHAT HAPPENS ON THE EEPROM
+	exampleCounter.printDebugInformation();	
+  
 
-State what an argument does and how you can use it. If needed, you can provide an example below.
+The Library can be installed by cloning or downloading it to Arduinos default library location (e.g. user/documents/Arduino/libraries/).
 
-Example:
-
-awesome-project "Some other value"  # Prints "You're nailing this readme!"
-
-Argument 2
-
-Type: Number|Boolean
-Default: 100
-
-Copy-paste as many of these as you need.
-Contributing
-
-"If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome."
-
-If there's anything else the developer needs to know (e.g. the code style guide), you should link it here. If there's a lot of things to take into consideration, it is common to separate this section to its own file called CONTRIBUTING.md (or similar). If so, you should say that it exists here.
-Links
-
-
-
-Licensing
-
-One really important part: Give your project a proper license. Here you should state what the license is and how to find the text version of the license. Something like:
-
-"The code in this project is licensed under MIT license."
