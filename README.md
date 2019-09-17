@@ -38,6 +38,5 @@ The basic commands are:
 	exampleCounter.printDebugInformation();	
   
 
-The Library can be installed by cloning or downloading it to Arduinos default library location.
-(e.g. user/documents/Arduino/libraries/)
+The Library can be installed by cloning or downloading it to Arduinos default library location, e.g. user/documents/Arduino/libraries/.
 
