@@ -14,10 +14,11 @@ EEPROM_Counter	KEYWORD1
 # ...KEYWORD2 is used for the public member functions of the class.
 #######################################
 
-countOneUp	KEYWORD2
-update		KEYWORD2
-setAllZero	KEYWORD2
+countOneUp 	KEYWORD2
+set	KEYWORD2
 getValue	KEYWORD2
+printDebugInformation	KEYWORD2
+setAllZero	KEYWORD2
 
 ######################################
 # Constants (LITERAL1)
@@ -25,3 +26,6 @@ getValue	KEYWORD2
 #######################################
 
 #KEY_NONE	LITERAL1
+
+
+
