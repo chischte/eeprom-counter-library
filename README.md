@@ -1,6 +1,6 @@
 # eeprom-counter-library 
-    
-	Library to store values on the non volatile Arduino EEPROM memory.
+
+**Library to store values on the non volatile Arduino EEPROM memory.**
 
 The ATmega328 microcontroller chip which is used on the Arduino Nano/Uno boards has an internal EEPROM storage of 1024 bytes.
 
@@ -17,7 +17,8 @@ To wear of the memory evenly, every 10,000 write cycles the location of the valu
 
 In the example code "eeprom_example_code", the possible commands of the library are listed, an their effect can be viewed in the serial print window.
 
-The basic commands are:
+Library Functions
+-----------------
 
 	// CREATE AN INSTANCE OF THE LIBRARY CLASS:
 	EEPROM_Counter exampleCounter(eepromSize, numberOfValues); 
@@ -38,5 +39,7 @@ The basic commands are:
 	exampleCounter.printDebugInformation();	
   
 
+Installation
+------------
 The Library can be installed by cloning or downloading it to Arduinos default library location, e.g. user/documents/Arduino/libraries/.
 
