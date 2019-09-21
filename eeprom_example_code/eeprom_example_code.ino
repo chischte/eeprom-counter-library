@@ -1,8 +1,7 @@
-#include <EEPROM_Counter.h>
+#include <EEPROM_Counter.h> //https://github.com/chischte/eeprom-counter-library.git
 
 // NAME THE VALUES TO BE STORED ON EEPROM BY ENTERING THEM IN THE LIST BELOW:
-enum counter
-{
+enum counter {
   longTimeCounter,    // example value name
   shortTimeCounter,   // example value name
   toolIdentNumber,    // example value name
@@ -20,19 +19,16 @@ int eepromSize = 1024;
 // CREATE AN INSTANCE OF THE LIBRARY CLASS:
 EEPROM_Counter exampleCounter(eepromSize, numberOfValues);
 
-void setup()
-{
+void setup() {
   Serial.begin(115200);
   Serial.println("EXIT SETUP");
 }
 
-void loop()
-{
+void loop() {
 
   //exampleCounter.setAllZero(); //sets all values to zero
 
-  for (int i = 0; i < 5; i++)
-  {
+  for (int i = 0; i < 5; i++) {
     exampleCounter.countOneUp(longTimeCounter);
   }
   exampleCounter.countOneUp(shortTimeCounter);

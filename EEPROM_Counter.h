@@ -24,8 +24,7 @@
 
 #include "Arduino.h"
 
-class EEPROM_Counter
-{
+class EEPROM_Counter {
 public:
   // FUNTIONS:
   EEPROM_Counter(int eepromSize, int numberOfValues);
@@ -34,8 +33,8 @@ public:
   long getValue(int valueNumber); // returns current value
   void printDebugInformation(); // extensively prints what happens with the values
   void setAllZero(); // resets all counters
- 
- // VARIABLES:
+
+  // VARIABLES:
   // n.a.
 
 private:
