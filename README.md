@@ -21,7 +21,9 @@ Library Functions
 -----------------
 
 	// CREATE AN INSTANCE OF THE LIBRARY CLASS:
-	EEPROM_Counter exampleCounter(eepromSize, numberOfValues); 
+	EEPROM_Counter exampleCounter(int eepromMinAddress, int eepromMaxAddress, int numberOfValues); 
+	// if the whole eeprom can be used set the min address to zero and
+	// the max address to the boards eeprom size-1.
 
 	// SET ALL STORED VALUES ZERO:
 	exampleCounter.setAllZero();
@@ -30,7 +32,8 @@ Library Functions
 	exampleCounter.countOneUp(numberOfTheCounter);
 
 	// SET COUNTER TO A VALUE:	
-	exampleCounter.set(numberOfTheCounter, valueToBeStored);	
+	exampleCounter.set(numberOfTheCounter, valueToBeStored);
+	// will only write if the value is new
 
 	// READ STORED VALUE FROM EEPROM:
 	long storedValue = exampleCounter.getValue(numberOfTheCounter);
