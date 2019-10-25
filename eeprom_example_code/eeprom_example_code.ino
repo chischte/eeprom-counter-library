@@ -12,11 +12,15 @@ enum counter {
 int numberOfValues = endOfEnum;
 
 // DEFINE THE EEPROM SIZE OF YOUR BOARD:
-// EEPROM size Arduino Nano/Uno: 1024 bytes (ATmega328P) > maxAddress =1023
-// EEPROM size Arduino Mega:     4096 bytes (ATmega2560) > maxAddress =4095
+// EEPROM size Arduino Nano/Uno: 1024 bytes (ATmega328P) -> maxAddress = 1023
+// EEPROM size Arduino Mega:     4096 bytes (ATmega2560) -> maxAddress = 4095
 
-int eepromMinAddress = 0;
-int eepromMaxAddress = 1023;
+// IT IS POSSIBLE TO USE ONLY A RANGE OF THE EEPROM
+// THIS CAN BE NECESSARY IF MORE THAN ONE FUNCTION REQUIRES ACCES TO A PART OF THE EEPROM
+// THE ASSIGNED SIZE HAS TO BE AT LEAST (numberOfValues*4+6)bytes
+
+int eepromMinAddress = 200; // has to be 0 or bigger
+int eepromMaxAddress = 400; // has to be at least one smaller than the EEPROM size of the processor used
 
 // CREATE AN INSTANCE OF THE LIBRARY CLASS:
 EEPROM_Counter exampleCounter(eepromMinAddress, eepromMaxAddress, numberOfValues);
@@ -43,6 +47,6 @@ void loop() {
   Serial.print("Value from getValue Function: ");
   Serial.println(ValueFromGetValue);
   exampleCounter.printDebugInformation();
-  //delay(1000);
+  delay(1000);
 
 }
