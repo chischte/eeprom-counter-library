@@ -31,7 +31,18 @@ EEPROM_Counter::EEPROM_Counter(int eepromMinAddress, int eepromMaxAddress, int n
     eeprom_write_block((void*) &newValue, (void*) valueAddress, sizeof(newValue));
     //--------------------------source------------destination---size}
   }
+
   _numberOfWriteCycles = eepromRead(_storeLocation);
+  // IF numberOfWriteCycles IS NEGATIVE, RESET IT TO 0
+  // this can happen with a new board only
+  if (_numberOfWriteCycles < 0) {
+    _numberOfWriteCycles = 0;
+    int newValue = 0;
+    int valueAddress = _storeLocation; // the adress of the storeLocation is always stored on the lowest 2 bytes;
+
+    eeprom_write_block((void*) &newValue, (void*) valueAddress, sizeof(newValue));
+    //--------------------------source------------destination---size}
+  }
 }
 
 void EEPROM_Counter::countOneUp(int valueNumber) {
@@ -95,7 +106,7 @@ void EEPROM_Counter::eepromMonitorWriteCycles() {
   }
 
   _storeWriteCounterCounter++;
-  if (_storeWriteCounterCounter >= 1000)  // every n-writes the writecountervalue will be stored
+  if (_storeWriteCounterCounter >= 100)  // every n-writes the writecountervalue will be stored
           {
     long newValue = _numberOfWriteCycles;
     int destinationAddress = _storeLocation;
