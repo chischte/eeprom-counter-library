@@ -1,6 +1,6 @@
 # eeprom-counter-library 
 
-![alt text](documents/GraphicalOverview.png)
+![alt text](documents/GraphicalOverview.jpg)
 
 **Library to store values on the non volatile Arduino EEPROM memory.**
 
