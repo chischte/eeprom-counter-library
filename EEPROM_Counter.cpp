@@ -10,22 +10,24 @@
 #include "Arduino.h"
 #include "EEPROM_Counter.h"
 
-EEPROM_Counter::EEPROM_Counter(int eepromSize, int numberOfValues) {
+EEPROM_Counter::EEPROM_Counter(int eepromMinAddress, int eepromMaxAddress, int numberOfValues) {
   // READ WHERE THE VALUES ARE STORED:
+  _eepromMinAddress = eepromMinAddress;
+  _minValueStorelocation = _eepromMinAddress + 2; //the first to bytes are reserved for the library
   _numberOfValues = numberOfValues;
-  _maxStoreLocation = (eepromSize - 1) - (numberOfValues * 4);    //eeprom address is 0 indexed
+  _maxStoreLocation = (eepromMaxAddress) - (_bytesForWriteCounter + (numberOfValues * 4));
   int valueRead;
-  int valueAddress = 0;    // the storeLocation is always stored on EEPROM byte 0 and 1
+  int valueAddress = _eepromMinAddress; // the storeLocation is always stored on the first two bytes
   eeprom_read_block((void*) &valueRead, (void*) valueAddress, sizeof(valueRead));
   //-------------------------destination--------source--------size
   _storeLocation = valueRead;
   // IF STORELOCATION IS TO BIG OR TO SMALL, RESET IT TO 2
   // this can happen with a new board only
-  if (_storeLocation > _maxStoreLocation || _storeLocation < 2) {
-    _storeLocation = 2;
+  if (_storeLocation > _maxStoreLocation || _storeLocation < _minValueStorelocation) {
+    _storeLocation = _minValueStorelocation;
     int newValue = _storeLocation;
-    int valueAddress = 0;
-    // the adress of the storeLocation is always stored on byte 0 and 1;
+    int valueAddress = _eepromMinAddress; // the adress of the storeLocation is always stored on the lowest 2 bytes;
+
     eeprom_write_block((void*) &newValue, (void*) valueAddress, sizeof(newValue));
     //--------------------------source------------destination---size}
   }
@@ -62,7 +64,7 @@ void EEPROM_Counter::setAllZero() {
 }
 
 int EEPROM_Counter::calculateAddress(int valueNumber) {
-  int addressNumber = _storeLocation + 4 + valueNumber * 4;
+  int addressNumber = _storeLocation + _bytesForWriteCounter + valueNumber * 4;
   //shift 4 bytes for the writeCounter and 4 bytes for every new value
   return addressNumber;
 }
@@ -105,16 +107,16 @@ void EEPROM_Counter::eepromMonitorWriteCycles() {
 
 void EEPROM_Counter::eepromMoveStorageLocation() {
   // CALCULATE NEW STORE LOCATION:
-  int moveSizeInBytes = 4 + _numberOfValues * 4; //the long for the writeCounter is included
+  int moveSizeInBytes = _bytesForWriteCounter + _numberOfValues * 4; //the long for the writeCounter is included
   int newStoreLocation = _storeLocation + moveSizeInBytes;
   if (newStoreLocation > _maxStoreLocation) {
-    newStoreLocation = 2;
+    newStoreLocation = _minValueStorelocation;
   }
   // COPY VALUES FROM OLD TO NEW LOCATION:
   for (int i = 0; i < _numberOfValues; i++) {
     int oldValueAddress = calculateAddress(i);
     long storedValue = eepromRead(oldValueAddress);
-    int newValueAddress = newStoreLocation + 4 + (i * 4);
+    int newValueAddress = newStoreLocation + _bytesForWriteCounter + (i * 4);
 
     long newValue = storedValue;
     int destinationAddress = newValueAddress;
@@ -124,7 +126,7 @@ void EEPROM_Counter::eepromMoveStorageLocation() {
   // CHANGE STORELOCATION ADDRESS:
   _storeLocation = newStoreLocation;
   int newValue = _storeLocation;
-  int valueAddress = 0;
+  int valueAddress = _eepromMinAddress;
   // the adress of the storeLocation is always stored on byte 0 and 1;
   eeprom_write_block((void*) &newValue, (void*) valueAddress, sizeof(newValue));
   //--------------------------source------------destination---size}

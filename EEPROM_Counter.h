@@ -11,7 +11,7 @@
  * *****************************************************************************
  EEPROM USAGE
  address of the _storeLocation_: 0
- address of the writecounter: _storeLocation
+ address of the writecounter: _storeLocation (4bytes)
  address of value-n: _storelocation + n*sizeof(long)  
  * *****************************************************************************
  TODO:
@@ -27,7 +27,7 @@
 class EEPROM_Counter {
 public:
   // FUNTIONS:
-  EEPROM_Counter(int eepromSize, int numberOfValues);
+  EEPROM_Counter(int eepromMinAddress, int eepromMaxAddress, int numberOfValues);
   void countOneUp(int valueNumber); // increases the value by one
   void set(int valueNumber, long newValue); // sets value
   long getValue(int valueNumber); // returns current value
@@ -46,7 +46,10 @@ private:
   int calculateAddress(int valueNumber);
 
   // VARIABLES:
+  byte _bytesForWriteCounter=4;
   int _storeLocation;
+  int _minValueStorelocation;
+  int _eepromMinAddress;
   int _maxStoreLocation;
   int _storeWriteCounterCounter;
   int _numberOfValues;

@@ -12,12 +12,14 @@ enum counter {
 int numberOfValues = endOfEnum;
 
 // DEFINE THE EEPROM SIZE OF YOUR BOARD:
-// EEPROM size Arduino Nano/Uno: 1024 bytes (ATmega328P)
-// EEPROM size Arduino Mega:     4096 bytes (ATmega2560)
-int eepromSize = 1024;
+// EEPROM size Arduino Nano/Uno: 1024 bytes (ATmega328P) > maxAddress =1023
+// EEPROM size Arduino Mega:     4096 bytes (ATmega2560) > maxAddress =4095
+
+int eepromMinAddress = 0;
+int eepromMaxAddress = 1023;
 
 // CREATE AN INSTANCE OF THE LIBRARY CLASS:
-EEPROM_Counter exampleCounter(eepromSize, numberOfValues);
+EEPROM_Counter exampleCounter(eepromMinAddress, eepromMaxAddress, numberOfValues);
 
 void setup() {
   Serial.begin(115200);
