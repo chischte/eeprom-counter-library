@@ -45,7 +45,8 @@ Library Functions
   
 	// PRINT OUT WHAT HAPPENS ON THE EEPROM
 	exampleCounter.printDebugInformation();	
-  
+ 
+  **An example of how the functions can be used can be found in the example code.**	
 
 Installation
 ------------
