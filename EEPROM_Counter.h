@@ -27,7 +27,8 @@
 class EEPROM_Counter {
 public:
   // FUNTIONS:
-  EEPROM_Counter(int eepromMinAddress, int eepromMaxAddress, int numberOfValues);
+  EEPROM_Counter();
+  void setup(int eepromMinAddress, int eepromMaxAddress, int numberOfValues);
   void countOneUp(int valueNumber); // increases the value by one
   void set(int valueNumber, long newValue); // sets value
   long getValue(int valueNumber); // returns current value
