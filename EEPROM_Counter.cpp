@@ -10,7 +10,11 @@
 #include "Arduino.h"
 #include "EEPROM_Counter.h"
 
-EEPROM_Counter::EEPROM_Counter(int eepromMinAddress, int eepromMaxAddress, int numberOfValues) {
+EEPROM_Counter::EEPROM_Counter(){
+
+}
+
+void EEPROM_Counter::setup(int eepromMinAddress, int eepromMaxAddress, int numberOfValues){
   // READ WHERE THE VALUES ARE STORED:
   _eepromMinAddress = eepromMinAddress;
   _minValueStorelocation = _eepromMinAddress + 2; //the first to bytes are reserved for the library
@@ -44,7 +48,6 @@ EEPROM_Counter::EEPROM_Counter(int eepromMinAddress, int eepromMaxAddress, int n
     //--------------------------source------------destination---size}
   }
 }
-
 void EEPROM_Counter::countOneUp(int valueNumber) {
   int valueAddress = calculateAddress(valueNumber);
   long storedValue = eepromRead(valueAddress);

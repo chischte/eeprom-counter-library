@@ -19,13 +19,14 @@ int numberOfValues = endOfEnum;
 // THIS CAN BE NECESSARY IF MORE THAN ONE FUNCTION REQUIRES ACCES TO A PART OF THE EEPROM
 // THE ASSIGNED SIZE HAS TO BE AT LEAST (numberOfValues*4+6)bytes
 
-int eepromMinAddress = 200; // has to be 0 or bigger
-int eepromMaxAddress = 400; // has to be at least one smaller than the EEPROM size of the processor used
+int eepromMinAddress = 500; // has to be 0 or bigger
+int eepromMaxAddress = 1000; // has to be at least one smaller than the EEPROM size of the processor used
 
 // CREATE AN INSTANCE OF THE LIBRARY CLASS:
-EEPROM_Counter exampleCounter(eepromMinAddress, eepromMaxAddress, numberOfValues);
+EEPROM_Counter exampleCounter;
 
 void setup() {
+  exampleCounter.setup(eepromMinAddress, eepromMaxAddress, numberOfValues);
   Serial.begin(115200);
   Serial.println("EXIT SETUP");
 }
