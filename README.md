@@ -5,8 +5,6 @@
 **Library to store values on the non volatile Arduino EEPROM memory.**
 
 
-
-
 The ATmega328 microcontroller chip which is used on the Arduino Nano/Uno boards has an internal EEPROM storage of 1024 bytes.
 
 The ATmega2560 microcontroller chip of the Arduino Mega has 4096 bytes of EEPROM storage.
