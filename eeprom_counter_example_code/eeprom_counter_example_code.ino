@@ -2,12 +2,12 @@
 
 // NAME THE VALUES TO BE STORED ON EEPROM BY ENTERING THEM IN THE LIST BELOW:
 enum counter {
-  longTimeCounter,    // example value name
-  shortTimeCounter,   // example value name
-  toolIdentNumber,    // example value name
-  somethingElse,      // example value name
-  endOfEnum           // add additional values before this one...
-                      // ...this has to be the last one!
+  longTimeCounter, // example value name
+  shortTimeCounter, // example value name
+  toolIdentNumber, // example value name
+  somethingElse, // example value name
+  endOfEnum // add additional values before this one...
+  // ...this has to be the last one!
 };
 int numberOfValues = endOfEnum;
 
@@ -20,7 +20,8 @@ int numberOfValues = endOfEnum;
 // THE ASSIGNED SIZE HAS TO BE AT LEAST (numberOfValues*4+6)bytes
 
 int eepromMinAddress = 500; // has to be 0 or bigger
-int eepromMaxAddress = 1000; // has to be at least one smaller than the EEPROM size of the processor used
+int eepromMaxAddress =
+    1000; // has to be at least one smaller than the EEPROM size of the processor used
 
 // CREATE AN INSTANCE OF THE LIBRARY CLASS:
 EEPROM_Counter exampleCounter;
@@ -36,18 +37,17 @@ void loop() {
   //exampleCounter.setAllZero(); //sets all values to zero
 
   for (int i = 0; i < 5; i++) {
-    exampleCounter.countOneUp(longTimeCounter);
+    exampleCounter.count_one_up(longTimeCounter);
   }
-  exampleCounter.countOneUp(shortTimeCounter);
+  exampleCounter.count_one_up(shortTimeCounter);
 
-  exampleCounter.countOneUp(toolIdentNumber);
+  exampleCounter.count_one_up(toolIdentNumber);
 
-  exampleCounter.set(somethingElse, 112233);
+  exampleCounter.set_value(somethingElse, 112233);
 
-  long ValueFromGetValue = exampleCounter.getValue(longTimeCounter);
+  long ValueFromGetValue = exampleCounter.get_value(longTimeCounter);
   Serial.print("Value from getValue Function: ");
   Serial.println(ValueFromGetValue);
-  exampleCounter.printDebugInformation();
+  exampleCounter.print_debug_information();
   delay(1000);
-
 }
