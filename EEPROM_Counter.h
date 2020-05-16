@@ -29,7 +29,7 @@ public:
   EEPROM_Counter();
   void setup(int eeprom_min_address, int eeprom_max_address, int number_of_values);
   void count_one_up(int value_number); // increases the value by one
-  void set(int value_number, long new_value); // sets value
+  void set_value(int value_number, long new_value); // sets value
   long get_value(int value_number); // returns current value
   void print_debug_information(); // extensively prints what happens with the values
   void set_all_zero(); // resets all counters

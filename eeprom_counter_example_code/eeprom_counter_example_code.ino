@@ -43,7 +43,7 @@ void loop() {
 
   exampleCounter.count_one_up(toolIdentNumber);
 
-  exampleCounter.set(somethingElse, 112233);
+  exampleCounter.set_value(somethingElse, 112233);
 
   long ValueFromGetValue = exampleCounter.get_value(longTimeCounter);
   Serial.print("Value from getValue Function: ");

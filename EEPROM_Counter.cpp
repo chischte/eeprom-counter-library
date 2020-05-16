@@ -57,7 +57,7 @@ void EEPROM_Counter::count_one_up(int valueNumber) {
   eeprom_write(newValue, valueAddress);
 }
 
-void EEPROM_Counter::set(int valueNumber, long newValue) {
+void EEPROM_Counter::set_value(int valueNumber, long newValue) {
   int valueAddress = calculate_address(valueNumber);
   long storedValue = eeprom_read(valueAddress);
   // CHECK IF VALUE HASN'T BEEN ASSIGNED YET:
