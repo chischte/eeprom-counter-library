@@ -15,7 +15,7 @@
  address of value-n: _storelocation + n*sizeof(long)  
  * *****************************************************************************
  TODO:
- CLEAN UP THE WHOLE CODE
+ CLEAN UP THE WHOLE CODE!
  */
 
 #ifndef EEPROM_Counter_h
@@ -39,7 +39,7 @@ public:
 
 private:
   // FUNCTIONS:
-  long eeprom_read(int sourceAdress);
+  long eeprom_read(int source_adress);
   void eeprom_write(long new_value, int destination_address);
   void eeprom_monitor_write_cycles();
   void eeprom_move_storage_location();
